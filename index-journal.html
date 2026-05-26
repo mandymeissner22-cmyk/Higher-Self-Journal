@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dein Journal wartet · Mandy Meissner</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --cream: #FAF8F4; --warm-white: #FDFBF8; --beige: #EDE7DC;
+  --blush: #E5D3C0; --gold: #B5906A; --gold-light: #D4B896;
+  --espresso: #3A2A1D; --brown: #6B4F38; --muted: #8A7060;
+  --border: rgba(181,144,106,0.22);
+}
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--espresso);
+  color: var(--warm-white);
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 40px 24px; text-align: center;
+}
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image: radial-gradient(circle, rgba(181,144,106,0.06) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+.wrap { position: relative; z-index: 1; max-width: 580px; width: 100%; }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.heart { font-size: 3.5rem; display: block; margin-bottom: 24px; animation: pulse 3s ease-in-out infinite; }
+
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gold-light); margin-bottom: 20px;
+  animation: fadeUp 0.6s ease both;
+}
+.eyebrow::before, .eyebrow::after { content: ''; display: block; height: 1px; width: 24px; background: rgba(212,184,150,0.4); }
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3rem); font-weight: 400; line-height: 1.2;
+  color: var(--warm-white); margin-bottom: 12px;
+  animation: fadeUp 0.6s ease 0.1s both;
+}
+h1 em { font-style: italic; color: var(--gold-light); }
+
+.subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem; font-style: italic;
+  color: rgba(253,251,248,0.55); margin-bottom: 40px; line-height: 1.75;
+  animation: fadeUp 0.6s ease 0.2s both;
+}
+
+/* DOWNLOAD CARD */
+.download-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(181,144,106,0.3);
+  border-radius: 20px; padding: 40px 36px; margin-bottom: 28px;
+  animation: fadeUp 0.6s ease 0.3s both;
+}
+.card-icon { font-size: 2.5rem; margin-bottom: 16px; display: block; }
+.card-label {
+  font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold-light); margin-bottom: 10px; display: block;
+}
+.card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem; font-weight: 400; color: var(--warm-white);
+  margin-bottom: 6px; line-height: 1.3;
+}
+.card-sub { font-size: 0.82rem; color: rgba(253,251,248,0.4); margin-bottom: 28px; }
+
+.btn-download {
+  display: block; width: 100%;
+  background: linear-gradient(90deg, var(--gold), #C4A882, var(--gold));
+  background-size: 200% auto;
+  color: var(--warm-white);
+  font-family: 'Jost', sans-serif; font-size: 0.88rem; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none;
+  padding: 18px 32px; border-radius: 8px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: none; cursor: pointer;
+  animation: shimmer 3s linear infinite;
+  margin-bottom: 10px;
+}
+.btn-download:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(181,144,106,0.3); }
+.btn-note { font-size: 0.74rem; color: rgba(253,251,248,0.3); }
+
+/* STEPS */
+.steps-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(181,144,106,0.18);
+  border-radius: 16px; padding: 28px 32px; margin-bottom: 28px;
+  text-align: left;
+  animation: fadeUp 0.6s ease 0.4s both;
+}
+.steps-label {
+  font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold-light); margin-bottom: 20px; display: block; text-align: center;
+}
+.step {
+  display: flex; gap: 16px; align-items: flex-start;
+  padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.step:last-child { border-bottom: none; }
+.step-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem; color: var(--gold); flex-shrink: 0; line-height: 1.1;
+  width: 28px;
+}
+.step-text { font-size: 0.86rem; color: rgba(253,251,248,0.7); line-height: 1.65; padding-top: 2px; }
+
+/* INSTAGRAM */
+.insta-card {
+  background: linear-gradient(135deg, rgba(107,79,56,0.35), rgba(58,42,29,0.5));
+  border: 1px solid rgba(181,144,106,0.2);
+  border-radius: 16px; padding: 24px 28px; margin-bottom: 32px;
+  animation: fadeUp 0.6s ease 0.5s both;
+}
+.insta-card p { font-size: 0.85rem; color: rgba(253,251,248,0.6); line-height: 1.7; margin-bottom: 14px; }
+.btn-insta {
+  display: inline-block;
+  background: transparent; color: var(--gold-light);
+  font-family: 'Jost', sans-serif; font-size: 0.8rem; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none;
+  padding: 10px 24px; border-radius: 6px;
+  border: 1px solid rgba(181,144,106,0.35);
+  transition: all 0.25s;
+}
+.btn-insta:hover { background: rgba(181,144,106,0.12); border-color: var(--gold); }
+
+/* SIGNATURE */
+.signature { animation: fadeUp 0.6s ease 0.6s both; }
+.sig-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem; font-style: italic;
+  color: rgba(253,251,248,0.35); line-height: 1.8; margin-bottom: 10px;
+}
+.sig-name { font-size: 0.82rem; color: var(--gold-light); }
+
+@media (max-width: 600px) {
+  .download-card, .steps-card, .insta-card { padding: 24px 20px; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <span class="heart">🤍</span>
+  <div class="eyebrow">Du hast es dir verdient</div>
+  <h1>Dein Journal<br><em>wartet auf dich.</em></h1>
+  <p class="subtitle">
+    30 Tage zurück zu dir selbst —<br>
+    ich freue mich so sehr, dass du diesen Schritt gegangen bist.
+  </p>
+
+  <!-- DOWNLOAD -->
+  <div class="download-card">
+    <span class="card-icon">📖</span>
+    <span class="card-label">✦  Dein kostenloses Geschenk  ✦</span>
+    <div class="card-title">Higher Self Journal · 30 Tage PDF</div>
+    <div class="card-sub">36 Seiten · Selbstwert · Grenzen · Identität · Freiheit</div>
+    <a href="https://drive.google.com/file/d/1D7wuU9nm6yGPiDhGekrBsdsDvI5asjMG/view?usp=sharing" target="_blank" class="btn-download">
+      📥 Journal jetzt herunterladen
+    </a>
+    <p class="btn-note">Öffnet Google Drive · kostenlos · sofort verfügbar</p>
+  </div>
+
+  <!-- STEPS -->
+  <div class="steps-card">
+    <span class="steps-label">✦  So startest du  ✦</span>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text">Klick auf den Button oben und lade das PDF herunter oder öffne es in Google Drive.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text">Lies die Willkommensseite — nimm dir einen ruhigen Moment nur für dich.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text">Starte mit Tag 1 — heute, morgen oder wann du bereit bist. Kein Druck, kein Muss.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-text">Teile deine Erfahrung gerne mit mir auf Instagram — ich freue mich auf dich! 🤍</div>
+    </div>
+  </div>
+
+  <!-- INSTAGRAM -->
+  <div class="insta-card">
+    <p>Möchtest du tiefer gehen? Ich begleite dich auch persönlich — bei Sichtbarkeit, Selbstwert und deinem freien Leben.</p>
+    <a href="https://www.instagram.com/ma.ndymeissner" target="_blank" class="btn-insta">
+      @ma.ndymeissner auf Instagram →
+    </a>
+  </div>
+
+  <!-- SIGNATURE -->
+  <div class="signature">
+    <p class="sig-quote">
+      „Ich bin so stolz auf dich, dass du dich selbst gewählt hast.<br>
+      Das ist der mutigste Schritt."
+    </p>
+    <div class="sig-name">In Liebe · Deine Mandy 🤍</div>
+  </div>
+
+</div>
+</body>
+</html>
